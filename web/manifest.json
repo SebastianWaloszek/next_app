@@ -1,6 +1,6 @@
 {
-    "name": "next_app",
-    "short_name": "next_app",
+    "name": "NextApp",
+    "short_name": "NextApp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

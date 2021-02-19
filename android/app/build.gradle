@@ -48,6 +48,24 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            dimension "default"
+            versionNameSuffix "-dev"
+            applicationId "com.waloszek.next_app.dev"
+        }
+        stage {
+            dimension "default"
+            versionNameSuffix "-stage"
+            applicationId "com.waloszek.next_app.stage"
+        }
+        production {
+            dimension "default"
+            applicationId "com.waloszek.next_app"
+        }
+    }
 }
 
 flutter {
