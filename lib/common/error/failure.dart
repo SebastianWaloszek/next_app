@@ -6,7 +6,7 @@ abstract class Failure extends Equatable {
   const Failure(this.error);
 
   @override
-  List<Object> get props => [error];
+  List<Object?> get props => [error];
 }
 
 class NetworkFailure extends Failure {

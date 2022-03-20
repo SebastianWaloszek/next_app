@@ -20,6 +20,5 @@ extension HttpMethodExtensions on HttpMethod {
       case HttpMethod.patch:
         return 'PATCH';
     }
-    throw UnsupportedError('$this is not supported');
   }
 }

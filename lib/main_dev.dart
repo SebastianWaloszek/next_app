@@ -1,11 +1,9 @@
-import 'package:flutter/widgets.dart';
 import 'package:next_app/common/environment/environment.dart';
 import 'package:next_app/common/environment/environment_dev.dart';
-import 'package:next_app/common/utils/injector.dart';
-import 'package:next_app/presentation/app.dart';
+import 'package:next_app/src/app/app_runner.dart';
 
-void main() {
+Future<void> main() async {
   Environment.setCurrent(DevelopmentEnvironment());
-  Injector.setup();
-  runApp(MyApp());
+
+  return runApplication();
 }

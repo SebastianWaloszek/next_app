@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class ThemedColor {
@@ -7,10 +5,9 @@ class ThemedColor {
   final Color dark;
 
   const ThemedColor({
-    @required this.light,
-    @required this.dark,
-  })  : assert(light != null),
-        assert(dark != null);
+    required this.light,
+    required this.dark,
+  });
 
   Color getColor(BuildContext context) {
     switch (Theme.of(context).brightness) {
@@ -19,6 +16,5 @@ class ThemedColor {
       case Brightness.dark:
         return dark;
     }
-    throw UnsupportedError('${Theme.of(context).brightness} is not supported');
   }
 }

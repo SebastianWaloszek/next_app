@@ -1,4 +1,4 @@
-import 'environment.dart';
+import 'package:next_app/common/environment/environment.dart';
 
 class DevelopmentEnvironment implements Environment {
   @override

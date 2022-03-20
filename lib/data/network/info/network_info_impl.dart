@@ -1,13 +1,12 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:next_app/data/network/info/network_info.dart';
-import 'package:meta/meta.dart';
 
 class NetworkInfoImpl implements NetworkInfo {
   final Connectivity connectivity;
 
   const NetworkInfoImpl({
-    @required this.connectivity,
-  }) : assert(connectivity != null);
+    required this.connectivity,
+  });
 
   @override
   Future<bool> get isConnected async {

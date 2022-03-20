@@ -1,9 +1,9 @@
 abstract class RequestException implements Exception {
-  final String message;
+  final String? message;
 
   const RequestException(this.message);
 
-  factory RequestException.fromStatusCode(int statusCode, String message) {
+  factory RequestException.fromStatusCode(int? statusCode, String? message) {
     if (statusCode != null) {
       if (statusCode == 401) {
         return UnauthorizedException(message);
@@ -18,7 +18,7 @@ abstract class RequestException implements Exception {
 }
 
 class UnauthorizedException extends RequestException {
-  const UnauthorizedException(String message) : super(message);
+  const UnauthorizedException(String? message) : super(message);
 }
 
 class ConnectionException extends RequestException {
@@ -26,15 +26,15 @@ class ConnectionException extends RequestException {
 }
 
 class ClientRequestException extends RequestException {
-  const ClientRequestException(String message) : super(message);
+  const ClientRequestException(String? message) : super(message);
 }
 
 class ServerRequestException extends RequestException {
-  const ServerRequestException(String message) : super(message);
+  const ServerRequestException(String? message) : super(message);
 }
 
 class UnexpectedException extends RequestException {
-  final int statusCode;
+  final int? statusCode;
 
-  const UnexpectedException(String message, this.statusCode) : super(message);
+  const UnexpectedException(String? message, this.statusCode) : super(message);
 }

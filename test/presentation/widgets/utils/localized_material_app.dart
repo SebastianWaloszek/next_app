@@ -5,10 +5,9 @@ class LocalizedMaterialApp extends StatelessWidget {
   final Widget child;
 
   const LocalizedMaterialApp({
-    Key key,
-    @required this.child,
-  })  : assert(child != null),
-        super(key: key);
+    Key? key,
+    required this.child,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

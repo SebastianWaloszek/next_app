@@ -9,10 +9,10 @@ import 'package:next_app/data/network/service/managed_network_service.dart';
 import 'package:next_app/data/network/service/network_service.dart';
 import 'package:next_app/data/network/service/network_service_impl.dart';
 
-T inject<T>([String name]) => KiwiContainer().resolve<T>(name);
+T inject<T>([String? name]) => KiwiContainer().resolve<T>(name);
 
 abstract class Injector {
-  static KiwiContainer container;
+  static late KiwiContainer container;
 
   static void setup() {
     container = KiwiContainer();
@@ -43,19 +43,19 @@ abstract class Injector {
   }
 
   static void _switchBasedOnEnvironment({
-    @required void Function() devSetup,
-    @required void Function() stageSetup,
-    @required void Function() prodSetup,
+    required void Function() devSetup,
+    required void Function() stageSetup,
+    required void Function() prodSetup,
   }) {
     switch (Environment.current.runtimeType) {
       case DevelopmentEnvironment:
-        devSetup?.call();
+        devSetup.call();
         break;
       case StageEnvironment:
-        stageSetup?.call();
+        stageSetup.call();
         break;
       case ProductionEnvironment:
-        prodSetup?.call();
+        prodSetup.call();
         break;
     }
   }
@@ -63,9 +63,11 @@ abstract class Injector {
   static void _common() {
     // NETWORK
     container.registerSingleton(
-      (c) => Dio(BaseOptions(
-        baseUrl: Environment.current.baseUrl,
-      )),
+      (c) => Dio(
+        BaseOptions(
+          baseUrl: Environment.current!.baseUrl,
+        ),
+      ),
     );
     container.registerSingleton<NetworkService>(
       (c) => NetworkServiceImpl(dio: c.resolve()),

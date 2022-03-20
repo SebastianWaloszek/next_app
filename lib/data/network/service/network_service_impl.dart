@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:next_app/data/network/http_method.dart';
 import 'package:next_app/data/network/request.dart';
 import 'package:next_app/data/network/request_exceptions.dart';
@@ -11,8 +10,8 @@ class NetworkServiceImpl implements NetworkService {
   final Dio dio;
 
   const NetworkServiceImpl({
-    @required this.dio,
-  }) : assert(dio != null);
+    required this.dio,
+  });
 
   @override
   Future<dynamic> make<T>(Request<T> request) async {
@@ -32,7 +31,7 @@ class NetworkServiceImpl implements NetworkService {
   }
 
   Future<T> _handleResponse<T>(Request<T> request, Response response) async {
-    final requestSucceeded = _requestSuccessful(response.statusCode);
+    final requestSucceeded = _requestSuccessful(response.statusCode!);
     if (requestSucceeded) {
       return request.createResponse(
         json.decode(response.data as String),
@@ -46,7 +45,7 @@ class NetworkServiceImpl implements NetworkService {
   }
 
   void _handleError(DioError error) {
-    if (error.type == DioErrorType.CONNECT_TIMEOUT) {
+    if (error.type == DioErrorType.connectTimeout) {
       throw ConnectionException(error.message);
     } else {
       throw RequestException.fromStatusCode(

@@ -3,6 +3,9 @@
  analyzer:
    exclude:
      - lib/presentation/localization/generated/intl/*.dart
+     - lib/presentation/localization/generated/*.dart
+     - '**/*.g.dart'
+     - '**/*.freezed.dart'
    errors:
      missing_required_param: error
 

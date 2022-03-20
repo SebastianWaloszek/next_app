@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
-import 'theme_colors.dart';
-import 'themed_color.dart';
+import 'package:next_app/presentation/theme/color/theme_colors.dart';
+import 'package:next_app/presentation/theme/color/themed_color.dart';
 
 abstract class AppColors {
   static Color primaryContent(BuildContext context) => ThemedColor(

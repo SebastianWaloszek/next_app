@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:next_app/common/error/failure.dart';
 import 'package:next_app/common/result/failure_result.dart';
 import 'package:next_app/common/result/result.dart';
@@ -13,13 +12,12 @@ class ManagedNetworkService extends NetworkServiceDecorator {
   final NetworkInfo networkInfo;
 
   const ManagedNetworkService({
-    @required this.networkInfo,
-    @required NetworkService networkService,
-  })  : assert(networkInfo != null),
-        super(networkService);
+    required this.networkInfo,
+    required NetworkService networkService,
+  }) : super(networkService);
 
   @override
-  Future<Result<T, Failure>> make<T>(Request<T> request) async {
+  Future<Result<T?, Failure>> make<T>(Request<T> request) async {
     final deviceNotConnected = await networkInfo.isNotConnected;
     if (deviceNotConnected) {
       return FailureResult<T, NetworkFailure>(
@@ -28,7 +26,7 @@ class ManagedNetworkService extends NetworkServiceDecorator {
     }
     try {
       final result = await networkService.make(request);
-      return SuccessResult(result as T);
+      return SuccessResult(result as T?);
     } on ConnectionException catch (e) {
       return FailureResult<T, NetworkFailure>(NetworkFailure(e));
     } on Exception catch (e) {

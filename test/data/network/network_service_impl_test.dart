@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:next_app/common/environment/environment.dart';
 import 'package:next_app/common/environment/environment_dev.dart';
 import 'package:next_app/common/error/failure.dart';
@@ -33,14 +33,14 @@ class MockFunction extends Mock implements Callable {}
 void main() {
   Environment.setCurrent(DevelopmentEnvironment());
 
-  NetworkInfo networkInfo;
-  Dio dio;
+  late NetworkInfo networkInfo;
+  late Dio dio;
 
   NetworkServiceImpl networkServiceImpl;
-  ManagedNetworkService managedNetworkService;
+  late ManagedNetworkService managedNetworkService;
 
-  RequestMock request;
-  Response response;
+  late RequestMock request;
+  late Response response;
 
   setUp(() {
     dio = DioMock();
@@ -53,18 +53,24 @@ void main() {
       networkService: networkServiceImpl,
     );
     request = const RequestMock();
-    response = Response(data: jsonEncode({}), statusCode: 200);
-    when(networkInfo.isNotConnected).thenAnswer((_) async => false);
+    response = Response(
+      data: jsonEncode({}),
+      requestOptions: RequestOptions(path: 'path'),
+      statusCode: 200,
+    );
+    when(() => networkInfo.isNotConnected).thenAnswer((_) async => false);
   });
 
   test('Should return SuccessResult when request succeeds', () async {
     // Build
-    when(dio.request(
-      any,
-      options: anyNamed('options'),
-      queryParameters: anyNamed('queryParameters'),
-      data: anyNamed('data'),
-    )).thenAnswer((_) async => response);
+    when(
+      () => dio.request(
+        any(),
+        options: any(named: 'options'),
+        queryParameters: any(named: 'queryParameters'),
+        data: any(named: 'data'),
+      ),
+    ).thenAnswer((_) async => response);
     // Act
     final result = await managedNetworkService.make(request);
     // Expect
@@ -73,50 +79,57 @@ void main() {
 
   test('Should return a failure result with NetworkFailure', () async {
     // Build
-    when(dio.request(
-      any,
-      options: anyNamed('options'),
-      queryParameters: anyNamed('queryParameters'),
-      data: anyNamed('data'),
-    )).thenThrow(const ConnectionException(''));
+    when(
+      () => dio.request(
+        any(),
+        options: any(named: 'options'),
+        queryParameters: any(named: 'queryParameters'),
+        data: any(named: 'data'),
+      ),
+    ).thenThrow(const ConnectionException(''));
     // Act
     final result = await managedNetworkService.make(request);
     // Expect
     expect(result is FailureResult, isTrue);
     result.fold(
-        onFailure: (failure) => expect(failure is NetworkFailure, isTrue),
-        onSuccess: (_) => {});
+      onFailure: (failure) => expect(failure is NetworkFailure, isTrue),
+      onSuccess: (_) => {},
+    );
   });
 
   test(
       'Should return a failure result with NetworkFailure on network not connected',
       () async {
     // Build
-    when(networkInfo.isNotConnected).thenAnswer((_) async => true);
+    when(() => networkInfo.isNotConnected).thenAnswer((_) async => true);
     // Act
     final result = await managedNetworkService.make(request);
     // Expect
     expect(result is FailureResult, isTrue);
     result.fold(
-        onFailure: (failure) => expect(failure is NetworkFailure, isTrue),
-        onSuccess: (_) => {});
+      onFailure: (failure) => expect(failure is NetworkFailure, isTrue),
+      onSuccess: (_) => {},
+    );
   });
 
   test('Should return a failure result with UnexpectedFailure on Exception',
       () async {
     // Build
-    when(dio.request(
-      any,
-      options: anyNamed('options'),
-      queryParameters: anyNamed('queryParameters'),
-      data: anyNamed('data'),
-    )).thenThrow(Exception());
+    when(
+      () => dio.request(
+        any(),
+        options: any(named: 'options'),
+        queryParameters: any(named: 'queryParameters'),
+        data: any(named: 'data'),
+      ),
+    ).thenThrow(Exception());
     // Act
     final result = await managedNetworkService.make(request);
     // Expect
     expect(result is FailureResult, isTrue);
     result.fold(
-        onFailure: (failure) => expect(failure is UnexpectedFailure, isTrue),
-        onSuccess: (_) => {});
+      onFailure: (failure) => expect(failure is UnexpectedFailure, isTrue),
+      onSuccess: (_) => {},
+    );
   });
 }

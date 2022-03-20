@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:next_app/presentation/localization/localization.dart';
+import 'package:next_app/presentation/navigation_routes.dart';
 import 'package:next_app/presentation/theme/app_themes.dart';
-import 'navigation_routes.dart';
 
 class MyApp extends StatelessWidget {
   static const String appName = 'NextApp';
