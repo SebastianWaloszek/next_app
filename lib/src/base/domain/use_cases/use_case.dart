@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:next_app/src/base/domain/entity/result.dart';
+import 'package:next_app/src/base/domain/entities/result.dart';
 
 /// A synchronous use case with [P] parameters.
 abstract class UseCaseWithParams<T, P extends Params> {

@@ -12,27 +12,7 @@ part of 'result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ResultTearOff {
-  const _$ResultTearOff();
-
-  _ResultSuccess<T> call<T>(T result) {
-    return _ResultSuccess<T>(
-      result,
-    );
-  }
-
-  _ResultFailure<T> failure<T>(Failure error) {
-    return _ResultFailure<T>(
-      error,
-    );
-  }
-}
-
-/// @nodoc
-const $Result = _$ResultTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Result<T> {
@@ -217,9 +197,9 @@ class _$_ResultSuccess<T> implements _ResultSuccess<T> {
 }
 
 abstract class _ResultSuccess<T> implements Result<T> {
-  const factory _ResultSuccess(T result) = _$_ResultSuccess<T>;
+  const factory _ResultSuccess(final T result) = _$_ResultSuccess<T>;
 
-  T get result;
+  T get result => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ResultSuccessCopyWith<T, _ResultSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -360,28 +340,13 @@ class _$_ResultFailure<T> implements _ResultFailure<T> {
 }
 
 abstract class _ResultFailure<T> implements Result<T> {
-  const factory _ResultFailure(Failure error) = _$_ResultFailure<T>;
+  const factory _ResultFailure(final Failure error) = _$_ResultFailure<T>;
 
-  Failure get error;
+  Failure get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ResultFailureCopyWith<T, _ResultFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$FailureTearOff {
-  const _$FailureTearOff();
-
-  _ErrorFailure call(dynamic value, [StackTrace? stackTrace]) {
-    return _ErrorFailure(
-      value,
-      stackTrace,
-    );
-  }
-}
-
-/// @nodoc
-const $Failure = _$FailureTearOff();
 
 /// @nodoc
 mixin _$Failure {
@@ -500,13 +465,13 @@ class _$_ErrorFailure implements _ErrorFailure {
 }
 
 abstract class _ErrorFailure implements Failure {
-  const factory _ErrorFailure(dynamic value, [StackTrace? stackTrace]) =
-      _$_ErrorFailure;
+  const factory _ErrorFailure(final dynamic value,
+      [final StackTrace? stackTrace]) = _$_ErrorFailure;
 
   @override
-  dynamic get value;
+  dynamic get value => throw _privateConstructorUsedError;
   @override
-  StackTrace? get stackTrace;
+  StackTrace? get stackTrace => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ErrorFailureCopyWith<_ErrorFailure> get copyWith =>

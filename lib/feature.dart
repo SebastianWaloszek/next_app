@@ -1,4 +1,6 @@
-/// The app features framework.
-library feature;
+/// The features framework.
+///
+/// Contains a module for each app feature.
+library features;
 
-export 'src/feature/example/presentation/screen/example_screen.dart';
+export 'src/features/features.dart';

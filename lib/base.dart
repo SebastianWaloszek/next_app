@@ -1,5 +1,6 @@
 /// The base framework.
+///
+/// Contains base components for use in any flutter project.
 library base;
 
-export 'src/base/domain/entity/result.dart';
-export 'src/base/domain/use_case/use_case.dart';
+export 'src/base/base.dart';

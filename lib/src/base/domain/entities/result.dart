@@ -15,7 +15,7 @@ class Result<T> with _$Result<T> {
   const factory Result.failure(Failure error) = _ResultFailure;
 }
 
-/// The errors returned by a [ResultFailure].
+/// The error returned by a [ResultFailure].
 @freezed
 class Failure with _$Failure {
   /// Creates a failure error with required [value] and optional [stackTrace].

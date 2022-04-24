@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:next_app/src/common/presentation/theme/color/app_colors.dart';
+import 'package:next_app/src/common/presentation/theme/app_colors.dart';
 
 // ignore_for_file: public_member_api_docs
 

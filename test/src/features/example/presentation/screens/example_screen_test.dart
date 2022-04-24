@@ -7,9 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:next_app/src/feature/example/presentation/screen/example_screen.dart';
+import 'package:next_app/src/features/example/presentation/screens/example_screen.dart';
 
-import '../../../../../util/widget/localized_material_app.dart';
+import '../../../../../util/widgets/localized_material_app.dart';
 
 void main() {
   testWidgets(

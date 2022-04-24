@@ -1,4 +1,6 @@
-/// The main app framework.
+/// The application framework.
+///
+/// Contains components used for configuring and running the application.
 library app;
 
 export 'src/app/app.dart';

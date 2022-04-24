@@ -11,6 +11,7 @@ class App extends StatelessWidget {
       title: 'NextApp',
       theme: appThemes[ThemeMode.light],
       darkTheme: appThemes[ThemeMode.dark],
+      themeMode: ThemeMode.light,
       routes: appNavigationRoutes,
       localizationsDelegates: localizationDelegates,
       supportedLocales: supportedLocales,
